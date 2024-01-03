@@ -1,0 +1,19 @@
+<!--div *ngIf="seznam">
+
+    <h3>{{seznam.naziv}}</h3>
+
+    <p>{{seznam.opis}}</p>
+    <p>Ustvarjen: {{seznam.ustvarjen | date: 'dd. MM. yyyy'}}</p>
+
+    <ul *ngFor="let artikel of seznam.artikli" class="artikli">
+        <li><b>{{artikel.naziv}}</b> <span *ngIf="artikel.opis"> &#8211; {{artikel.opis}}</span></li>
+    </ul>
+
+    <br>
+    <button (click)="dodajArtikel()">Dodaj artikel</button>
+    <button (click)="nazaj()">Nazaj</button>
+</div>-->
+<div *ngIf="destinacija">
+    <h3>{{destinacija.title}}</h3>
+    <p>{{destinacija.description}}</p>
+</div>
