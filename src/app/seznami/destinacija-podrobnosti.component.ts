@@ -9,10 +9,10 @@ import {DestinacijeService} from './services/destinacije.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'seznam-podrobnosti',
-    templateUrl: 'seznam-podrobnosti.component.html'
+    selector: 'destinacija-podrobnosti',
+    templateUrl: 'destinacija-podrobnosti.component.html'
 })
-export class SeznamPodrobnostiComponent implements OnInit {
+export class DestinacijaPodrobnostiComponent implements OnInit {
     destinacija: Destinacija;
 
     constructor(private destinacijaService: DestinacijeService,
@@ -28,9 +28,9 @@ export class SeznamPodrobnostiComponent implements OnInit {
             .subscribe(destinacija => this.destinacija = destinacija);
     }
 
-    dodajArtikel(): void {
+    /*dodajArtikel(): void {
         this.router.navigate(['destinacije/' + this.destinacija.id + '/dodaj']);
-    }
+    }*/
 
     nazaj(): void {
         this.router.navigate(['destinacije']);

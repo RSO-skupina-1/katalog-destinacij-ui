@@ -6,9 +6,9 @@ import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
-import {SeznamiComponent} from './seznami/seznami.component';
+import {DestinacijeComponent} from './seznami/destinacije.component';
 import {ArtikelDodajComponent} from './seznami/artikel-dodaj.component';
-import {SeznamPodrobnostiComponent} from './seznami/seznam-podrobnosti.component';
+import {DestinacijaPodrobnostiComponent} from './seznami/destinacija-podrobnosti.component';
 import {DestinacijeService} from './seznami/services/destinacije.service';
 
 
@@ -21,8 +21,8 @@ import {DestinacijeService} from './seznami/services/destinacije.service';
     ],
     declarations: [
         AppComponent,
-        SeznamiComponent,
-        SeznamPodrobnostiComponent,
+        DestinacijeComponent,
+        DestinacijaPodrobnostiComponent,
         ArtikelDodajComponent
     ],
     providers: [DestinacijeService],

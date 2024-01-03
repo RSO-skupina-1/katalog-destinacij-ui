@@ -4,7 +4,7 @@
     <li *ngFor="let destinacija of destinacije" (click)="naPodrobnosti(destinacija)">
         <span>{{destinacija.title}}</span>
         <button class="delete"
-                (click)="delete(detinacija); $event.stopPropagation()">x
+                (click)="delete(destinacija); $event.stopPropagation()">x
         </button>
     </li>
 </ul>

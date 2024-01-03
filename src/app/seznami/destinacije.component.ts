@@ -7,9 +7,9 @@ import { DestinacijeService } from './services/destinacije.service';
 @Component({
     moduleId: module.id,
     selector: 'vse-destinacije',
-    templateUrl: 'seznami.component.html'
+    templateUrl: 'destinacije.component.html'
 })
-export class SeznamiComponent implements OnInit {
+export class DestinacijeComponent implements OnInit {
     destinacije: Destinacija[];
     destinacija: Destinacija;
 
