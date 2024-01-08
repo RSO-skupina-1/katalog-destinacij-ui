@@ -6,16 +6,23 @@ import { switchMap } from 'rxjs/operators';
 
 import {Destinacija} from './models/destinacija';
 import {DestinacijeService} from './services/destinacije.service';
+import { Komentar } from './models/komentar';
+import { KomentarService } from './services/komentar.service';
 
 @Component({
     moduleId: module.id,
     selector: 'destinacija-podrobnosti',
-    templateUrl: 'destinacija-podrobnosti.component.html'
+    templateUrl: 'destinacija-podrobnosti.component.html',
+    providers: [DestinacijeService, KomentarService]
 })
 export class DestinacijaPodrobnostiComponent implements OnInit {
     destinacija: Destinacija;
+    komentarji: Komentar[];
+    ocena: string;
+    dates: string[];
 
     constructor(private destinacijaService: DestinacijeService,
+                private komentarService: KomentarService,
                 private route: ActivatedRoute,
                 private location: Location,
                 private router: Router) {
@@ -23,9 +30,35 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.route.params['id'])
-       this.route.params.pipe(
+        this.route.params.pipe(
             switchMap((params: Params) => this.destinacijaService.getDestinacija(params['id'])))
             .subscribe(destinacija => this.destinacija = destinacija);
+        
+        this.route.params.pipe(
+            switchMap((params: Params) => this.komentarService.getKomentarByDestinacijaId(params['id'])))
+            .subscribe(komentarji => {
+                this.komentarji = komentarji;
+                this.ocena = this.calculateAverageOcena(komentarji);
+            });
+    }
+
+    calculateAverageOcena(komentarji: Komentar[]): string {
+        if (komentarji.length === 0) {
+            return "2.5";
+        }
+
+        const sum = komentarji.reduce((total, komentar) => total + komentar.ocena, 0);
+        let average = sum / komentarji.length;
+        average = average < 5 ? average : 5;
+        
+        return average.toFixed(1);
+    }
+
+    formatDate(date: Date): string {
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
     }
 
     /*dodajArtikel(): void {

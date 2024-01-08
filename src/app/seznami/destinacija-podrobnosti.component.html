@@ -16,4 +16,16 @@
 <div *ngIf="destinacija">
     <h3>{{destinacija.title}}</h3>
     <p>{{destinacija.description}}</p>
+    <div *ngIf="komentarji">
+        <span>Ocena: {{ocena}}</span>
+    </div>
+
+    
+    <ul *ngIf="komentarji">
+        <li *ngFor="let komentar of komentarji">
+            <div>Posted by: {{komentar.user_id}}, on {{komentar.ustvarjen}}</div>
+            <div>{{komentar.komentar}}</div>
+        </li>
+    </ul>
 </div>
+
