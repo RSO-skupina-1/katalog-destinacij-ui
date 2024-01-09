@@ -1,0 +1,20 @@
+<!--<nav class="navbar">
+    <div class="logo">Katalog Destinacij</div>
+    <ul class="nav-list">
+      <li><a routerLink="/search">Search</a></li>
+      <li><a routerLink="/login">Login</a></li>
+    </ul>
+</nav>-->
+  
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="navbar-title">Katalog Destinacij</span>
+  </div>
+  <div class="navbar-right">
+    <ul>
+      <li><a routerLink="/search">Search</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+    </ul>
+  </div>
+</nav>

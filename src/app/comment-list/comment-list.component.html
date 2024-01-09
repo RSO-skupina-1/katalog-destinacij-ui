@@ -1,0 +1,36 @@
+<div class="comment-container">
+    <h2>Comments</h2>
+    <div class="average-rating">
+        <p>Average Rating: {{ ocena }}/5</p>
+    </div>
+    <ul class="comment-list">
+      <li *ngFor="let comment of comments" class="comment-item">
+        <div class="comment-header">
+          <span class="comment-user">Uporabnik {{ comment.user_id }}</span>
+          <span class="comment-date">{{ comment.ustvarjen | date: 'medium' }}</span>
+        </div>
+        <div class="comment-body">
+          <p>{{ comment.komentar }}</p>
+          <p class="comment-rating">Ocena: {{ comment.ocena }}</p>
+        </div>
+      </li>
+    </ul>
+  
+    <div *ngIf="isLoggedIn">
+      <!-- Show comment form only if the user is logged in -->
+      <div class="comment-form">
+        <label for="comment">Dodaj komentar:</label>
+        <textarea id="comment" [(ngModel)]="newComment" name="comment" required></textarea>
+  
+        <label for="rating">Ocena:</label>
+        <select id="rating" [(ngModel)]="newRating" name="ocena">
+          <option *ngFor="let i of [1, 2, 3, 4, 5]" [value]="i">{{ i }}</option>
+        </select>
+  
+        <button (click)="addComment()">Dodaj komentar</button>
+      </div>
+    </div>
+</div>
+  
+  
+  

@@ -1,11 +1,21 @@
-<h2>Katalog destinacij</h2>
+<!--<h2>Katalog destinacij</h2>-->
 
-<ul class="seznami">
+<!--<ul class="seznami">
     <li *ngFor="let destinacija of destinacije" (click)="naPodrobnosti(destinacija)">
         <span>{{destinacija.title}}</span>
         <button class="delete"
                 (click)="delete(destinacija); $event.stopPropagation()">x
         </button>
     </li>
-</ul>
+</ul>-->
 
+<div class="destinacija-list-container">  
+    <ul class="destinacija-list">
+      <li *ngFor="let destinacija of destinacije" (click)="naPodrobnosti(destinacija)" class="destinacija-item">
+        <div class="destinacija-header">
+          <span class="destinacija-title">{{ destinacija.title }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

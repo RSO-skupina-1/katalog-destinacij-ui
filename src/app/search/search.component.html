@@ -1,0 +1,18 @@
+<div class="search-container">
+    <div class="search-input">
+        <input [(ngModel)]="searchQuery" (keyup.enter)="search()" placeholder="Enter your search query" />
+        <button (click)="search()">Search</button>
+    </div>
+
+    <div *ngIf="searchResults">
+        <h2>Search Results</h2>
+        <ul class="results-list">
+        <li *ngFor="let destinacija of searchResults" (click)="naPodrobnosti(destinacija)">
+            <div class="result-item">
+            <span>{{ destinacija.title }}</span>
+            <!-- Add more details or customize as needed -->
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>

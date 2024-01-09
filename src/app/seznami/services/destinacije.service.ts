@@ -7,11 +7,13 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Artikel } from '../models/artikel';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class DestinacijeService {
 
     private headers = new HttpHeaders().set('access-control-allow-origin', 'http://localhost:8080');
-    private url = 'http://localhost:8080/v1/katalogDestinacij';
+    private url = environment.katalogUrl;
     
 
     constructor(private http: HttpClient) {
@@ -25,6 +27,12 @@ export class DestinacijeService {
     getDestinacija(id: number): Observable<Destinacija> {
         const url = `${this.url}/${id}`;
         return this.http.get<Destinacija>(url)
+                        .pipe(catchError(this.handleError));
+    }
+
+    getNearestDestinacije(name: string, offset: number, limit: number): Observable<Destinacija[]> {
+        const url = `${this.url}/nearestByName/${name}/${offset}/${limit}`;
+        return this.http.get<Destinacija[]>(url)
                         .pipe(catchError(this.handleError));
     }
 

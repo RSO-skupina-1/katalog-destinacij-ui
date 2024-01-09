@@ -14,18 +14,31 @@
     <button (click)="nazaj()">Nazaj</button>
 </div>-->
 <div *ngIf="destinacija">
-    <h3>{{destinacija.title}}</h3>
-    <p>{{destinacija.description}}</p>
-    <div *ngIf="komentarji">
+    <!--<h3>{{destinacija.title}}</h3>
+    <p>{{destinacija.description}}</p>-->
+    <div class="destination-container">
+        <h2>{{ destinacija.title }}</h2>
+      
+        <div class="destination-info">
+          <p>{{ destinacija.description }}</p>
+          <p>Lokacija: {{ destinacija.location }}</p>
+          <p>Dostopnost: {{ destinacija.accessibility }}</p>
+          <p>Infrastruktura: {{ destinacija.infrastructure }}</p>
+          <!--<p>Cena: {{ destinacija.price | currency: 'EUR' }}</p>-->
+        </div>
+      </div>
+      
+    <!--<div *ngIf="komentarji">
         <span>Ocena: {{ocena}}</span>
-    </div>
+    </div>-->
 
     
-    <ul *ngIf="komentarji">
+    <!--<ul *ngIf="komentarji">
         <li *ngFor="let komentar of komentarji">
             <div>Posted by: {{komentar.user_id}}, on {{komentar.ustvarjen}}</div>
             <div>{{komentar.komentar}}</div>
         </li>
-    </ul>
+    </ul>-->
+    <app-comment-list [destinacija]="destinacija"></app-comment-list>
 </div>
 

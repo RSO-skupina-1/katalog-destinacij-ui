@@ -1,0 +1,46 @@
+.navbar {
+    background-color: #007bff;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px; /* Adjust the font size to match the buttons */
+    transition: color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .navbar-right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-right li {
+    margin-right: 15px;
+  }
+  
+  .navbar-right a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .navbar-right a:hover {
+    color: #eaeaea; /* Change text color on hover */
+  }
+  

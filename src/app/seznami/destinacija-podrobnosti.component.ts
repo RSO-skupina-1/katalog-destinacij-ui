@@ -8,12 +8,14 @@ import {Destinacija} from './models/destinacija';
 import {DestinacijeService} from './services/destinacije.service';
 import { Komentar } from './models/komentar';
 import { KomentarService } from './services/komentar.service';
+import { CommentListComponent } from '../comment-list/comment-list.component';
 
 @Component({
     moduleId: module.id,
     selector: 'destinacija-podrobnosti',
     templateUrl: 'destinacija-podrobnosti.component.html',
-    providers: [DestinacijeService, KomentarService]
+    providers: [DestinacijeService, KomentarService],
+    styleUrls: ['./destinacija-podrobnosti.component.css'],
 })
 export class DestinacijaPodrobnostiComponent implements OnInit {
     destinacija: Destinacija;
@@ -29,7 +31,6 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.route.params['id'])
         this.route.params.pipe(
             switchMap((params: Params) => this.destinacijaService.getDestinacija(params['id'])))
             .subscribe(destinacija => this.destinacija = destinacija);
@@ -60,10 +61,6 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
-
-    /*dodajArtikel(): void {
-        this.router.navigate(['destinacije/' + this.destinacija.id + '/dodaj']);
-    }*/
 
     nazaj(): void {
         this.router.navigate(['destinacije']);

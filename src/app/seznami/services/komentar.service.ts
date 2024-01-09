@@ -5,14 +5,20 @@ import { Komentar } from '../models/komentar';
 import { Observable } from 'rxjs';
 
 import { catchError } from 'rxjs/operators';
-import { Artikel } from '../models/artikel';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class KomentarService {
 
-    private headers = new HttpHeaders().set('access-control-allow-origin', 'http://localhost:8081');
-    private url = 'http://localhost:8081/v1/komentar';
+    //private headers = new HttpHeaders().set('access-control-allow-origin', 'http://localhost:8081');
+    private url = environment.komentarUrl;
     
+    private httpOptions = {
+        headers: new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'access-control-allow-origin': 'http://localhost:8081' 
+        })
+    };
 
     constructor(private http: HttpClient) {
     }
@@ -42,7 +48,7 @@ export class KomentarService {
 
     delete(id: number): Observable<void> {
         const url = `${this.url}/${id}`;
-        this.http.delete<void>(url, {headers: this.headers})
+        this.http.delete<void>(url, {headers: this.httpOptions.headers})
                         .pipe(
                             catchError(this.handleError)
                         );
@@ -50,13 +56,13 @@ export class KomentarService {
     }
 
     create(komentar: Komentar): Observable<Komentar> {
-        return this.http.post<Komentar>(this.url, JSON.stringify(komentar), {headers: this.headers})
+        return this.http.post<Komentar>(this.url, JSON.stringify(komentar), this.httpOptions)
                         .pipe(catchError(this.handleError));
     }
 
     update(komentar: Komentar): Observable<Komentar> {
         const url = `${this.url}/${komentar.id}`;
-        return this.http.put<Komentar>(url, JSON.stringify(komentar), {headers: this.headers})
+        return this.http.put<Komentar>(url, JSON.stringify(komentar), this.httpOptions)
                         .pipe(catchError(this.handleError));
     }
 
