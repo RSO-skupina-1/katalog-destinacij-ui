@@ -47,6 +47,10 @@ export class LoginService {
         return this.http.post<User>(this.url + '/login', JSON.stringify(user), this.httpOptions)
     }
 
+    getUserById(id: number): Observable<User> {
+        return this.http.get<User>(this.url + '/' + id, this.httpOptions);
+    }
+
     setLoggedInUser(user: User): void {
         this.loggedInUser = user.username;
         this.loggedInUserId = user.id;

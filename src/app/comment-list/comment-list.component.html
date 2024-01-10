@@ -6,7 +6,8 @@
     <ul class="comment-list">
       <li *ngFor="let comment of comments" class="comment-item">
         <div class="comment-header">
-          <span class="comment-user">Uporabnik {{ comment.user_id }}</span>
+          <span *ngIf="comment.username" class="comment-user">Uporabnik {{ comment.username }}</span>
+          <span *ngIf="!comment.username" class="comment-user">Uporabnik {{ comment.user_id }}</span>
           <span class="comment-date">{{ comment.ustvarjen | date: 'medium' }}</span>
         </div>
         <div class="comment-body">

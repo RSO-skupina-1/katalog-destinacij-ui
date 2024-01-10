@@ -46,6 +46,14 @@ export class CommentListComponent implements OnInit {
     if (destinacijaId) {
       this.commentService.getKomentarByDestinacijaId(Number(destinacijaId)).subscribe((comments) => {
         this.comments = comments;
+
+        //for each comment, get the user's name
+        this.comments.forEach((comment) => {
+          this.loginService.getUserById(comment.user_id).subscribe((user) => {
+            console.log(user);
+            comment.username = user.username;
+          });
+        });
       });
     }
   }

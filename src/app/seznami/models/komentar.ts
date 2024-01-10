@@ -5,4 +5,5 @@ export class Komentar {
     komentar: string;
     ocena: number;
     ustvarjen: Date;
+    username: string;
 }
