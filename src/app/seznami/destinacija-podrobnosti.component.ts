@@ -9,6 +9,7 @@ import {DestinacijeService} from './services/destinacije.service';
 import { Komentar } from './models/komentar';
 import { KomentarService } from './services/komentar.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
+import { LoginService } from '../login.service';
 
 @Component({
     moduleId: module.id,
@@ -22,9 +23,13 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
     komentarji: Komentar[];
     ocena: string;
     dates: string[];
+    visited: boolean = false;
+    isLoggedIn: boolean;
+    userId: number;
 
     constructor(private destinacijaService: DestinacijeService,
                 private komentarService: KomentarService,
+                private loginService: LoginService,
                 private route: ActivatedRoute,
                 private location: Location,
                 private router: Router) {
@@ -41,6 +46,24 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
                 this.komentarji = komentarji;
                 this.ocena = this.calculateAverageOcena(komentarji);
             });
+        this.loginService.loginStatus.subscribe((status) => {
+            this.isLoggedIn = status;
+        });
+    
+        // Initialize isLoggedIn based on the user's login status
+        this.isLoggedIn = this.loginService.isLoggedIn();
+    
+        this.loginService.loginUserId.subscribe((id) => {
+            this.userId = id;
+        });
+    
+        this.userId = this.loginService.getUserId();
+
+        if (this.isLoggedIn) {
+            this.loginService.getUserById(this.userId).subscribe((user) => {
+                this.visited = user.visitedLocations.includes(this.destinacija.id);
+            });
+        }
     }
 
     calculateAverageOcena(komentarji: Komentar[]): string {
@@ -60,6 +83,19 @@ export class DestinacijaPodrobnostiComponent implements OnInit {
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
+    }
+
+    toggleVisited(): void {
+        this.visited = !this.visited;
+        if (this.visited) {
+            this.loginService.addVisitedLocation(this.userId, this.destinacija.id).subscribe((user) => {
+                console.log(user);
+            })
+        } else {
+            this.loginService.removeVisitedLocation(this.userId, this.destinacija.id).subscribe((user) => {
+                console.log(user);
+            });
+        }
     }
 
     nazaj(): void {

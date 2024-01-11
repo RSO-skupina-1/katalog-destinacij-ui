@@ -11,10 +11,14 @@ import {ArtikelDodajComponent} from './seznami/artikel-dodaj.component';
 import {DestinacijaPodrobnostiComponent} from './seznami/destinacija-podrobnosti.component';
 import {DestinacijeService} from './seznami/services/destinacije.service';
 import { LoginService } from './login.service';
+import { KomentarService } from './seznami/services/komentar.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RecomendationsComponent } from './recomendations/recomendations.component';
+import { RecomendationsService } from './recomendations.service';
 
 
 @NgModule({
@@ -32,9 +36,11 @@ import { LoginComponent } from './login/login.component';
         NavbarComponent,
         SearchComponent,
         CommentListComponent,
-        LoginComponent
+        LoginComponent,
+        ProfileComponent,
+        RecomendationsComponent
     ],
-    providers: [DestinacijeService],
+    providers: [DestinacijeService, LoginService, KomentarService, RecomendationsService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { KomentarService } from '../seznami/services/komentar.service';
 import { ActivatedRoute } from '@angular/router';
 import {Komentar} from '../seznami/models/komentar';
@@ -11,12 +11,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./comment-list.component.css'],
 })
 export class CommentListComponent implements OnInit {
-  comments: Komentar[] = [];
+  @Input() comments: Komentar[];
   newComment: string = '';
   newRating: number = 0;
   ocena: string;
   isLoggedIn: boolean;
   userId: number;
+  @Input() onProfilePage: boolean = true;
 
   dataSubscription: Subscription;
 
@@ -26,8 +27,10 @@ export class CommentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getComments();
-    this.ocena = this.calculateAverageOcena(this.comments);
+    if (!this.comments) {
+      this.getComments();
+    }
+    
     if (!this.dataSubscription || this.dataSubscription.closed) {
       this.dataSubscription = this.loginService.loginStatus.subscribe((status) => {
         this.isLoggedIn = status;
@@ -46,11 +49,11 @@ export class CommentListComponent implements OnInit {
     if (destinacijaId) {
       this.commentService.getKomentarByDestinacijaId(Number(destinacijaId)).subscribe((comments) => {
         this.comments = comments;
-
+        this.ocena = this.calculateAverageOcena(this.comments);
         //for each comment, get the user's name
         this.comments.forEach((comment) => {
           this.loginService.getUserById(comment.user_id).subscribe((user) => {
-            console.log(user);
+            //console.log(user);
             comment.username = user.username;
           });
         });
@@ -85,5 +88,9 @@ export class CommentListComponent implements OnInit {
       this.ocena = this.calculateAverageOcena(this.comments);
     });
     return
+  }
+
+  canShowForm(): boolean {
+    return this.isLoggedIn && !this.onProfilePage;
   }
 }

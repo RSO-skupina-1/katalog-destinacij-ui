@@ -26,7 +26,11 @@
           <p>Infrastruktura: {{ destinacija.infrastructure }}</p>
           <!--<p>Cena: {{ destinacija.price | currency: 'EUR' }}</p>-->
         </div>
-      </div>
+        <button *ngIf="isLoggedIn" type="button" class="btn btn-primary" (click)="toggleVisited()">
+            {{ this.visited? 'Remove Visit' : 'Mark as Visited' }}
+        </button>
+    </div>
+    
       
     <!--<div *ngIf="komentarji">
         <span>Ocena: {{ocena}}</span>
@@ -39,6 +43,6 @@
             <div>{{komentar.komentar}}</div>
         </li>
     </ul>-->
-    <app-comment-list [destinacija]="destinacija"></app-comment-list>
+    <app-comment-list [destinacija]="destinacija" [onProfilePage]="false"></app-comment-list>
 </div>
 

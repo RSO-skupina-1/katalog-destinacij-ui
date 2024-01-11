@@ -12,9 +12,12 @@
   </div>
   <div class="navbar-right">
     <ul>
-      <li><a routerLink="/search">Search</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-      <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="naPriporocila()">Priporočila</a></li>
+      <li><a routerLink="/destinacije">Destinacije</a></li>
+      <li><a routerLink="/search">Iskanje</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="naProfil()">Profil</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Prijava</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()">Odjava</a></li>
     </ul>
   </div>
 </nav>

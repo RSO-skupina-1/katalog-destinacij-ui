@@ -6,6 +6,8 @@ import {DestinacijaPodrobnostiComponent} from './seznami/destinacija-podrobnosti
 import { ArtikelDodajComponent } from './seznami/artikel-dodaj.component';
 import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RecomendationsComponent } from './recomendations/recomendations.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/destinacije', pathMatch: 'full'},
@@ -13,7 +15,9 @@ const routes: Routes = [
     {path: 'destinacije/:id', component: DestinacijaPodrobnostiComponent},
     {path: 'destinacije/:id/dodaj', component: ArtikelDodajComponent},
     {path: 'search', component: SearchComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'profile/:id', component: ProfileComponent},
+    {path: 'priporocila/:id', component: RecomendationsComponent}
 ];
 
 @NgModule({

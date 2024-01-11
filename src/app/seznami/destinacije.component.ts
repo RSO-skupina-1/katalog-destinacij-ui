@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import { Destinacija } from './models/destinacija';
@@ -11,7 +11,8 @@ import { DestinacijeService } from './services/destinacije.service';
     styleUrls: ['./destinacije.component.css'],
 })
 export class DestinacijeComponent implements OnInit {
-    destinacije: Destinacija[];
+
+    @Input() destinacije: Destinacija[];
     destinacija: Destinacija;
 
     constructor(private destinacijaService: DestinacijeService,
@@ -19,7 +20,10 @@ export class DestinacijeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getSeznami();
+        //console.log(this.destinacijeType);
+        if (!this.destinacije) {
+            this.getSeznami();
+        }
     }
 
     getSeznami(): void {

@@ -17,7 +17,7 @@
       </li>
     </ul>
   
-    <div *ngIf="isLoggedIn">
+    <div *ngIf="canShowForm()">
       <!-- Show comment form only if the user is logged in -->
       <div class="comment-form">
         <label for="comment">Dodaj komentar:</label>

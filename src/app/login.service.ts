@@ -15,7 +15,7 @@ export class LoginService {
     private httpOptions = {
         headers: new HttpHeaders({ 
             'Content-Type': 'application/json',
-            'access-control-allow-origin': 'http://localhost:8083' 
+            'access-control-allow-origin': 'http://localhost:8083'
         })
     };
     private url = environment.uporabnikUrl;
@@ -82,6 +82,17 @@ export class LoginService {
         }
         this.loginStatusSubject.next(status);
         this.loginUserIdSubject.next(userId);
+    }
+
+    addVisitedLocation(userId: number, locationId: number): Observable<User> {
+        console.log("adding visited location", locationId)
+        return this.http.post<User>(this.url + '/' + userId + '/obiskane/' + locationId, JSON.stringify(new User()), this.httpOptions);
+    }
+
+    removeVisitedLocation(userId: number, locationId: number): Observable<User> {
+        console.log("removing visited location", locationId)
+        //this.httpOptions.headers['Access-Control-Request-Method'] = 'DELETE';
+        return this.http.post<User>(this.url + '/' + userId + '/obiskane/' + locationId+'/delete', JSON.stringify(new User()), this.httpOptions);
     }
 
     private handleError(error: any): Promise<any> {
